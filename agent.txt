@@ -6,10 +6,9 @@ import platform
 import requests
 
 window = Tk()
-window.configure(background='#006666')
+window.configure(background='#ccccb3')
 window.geometry('300x300+500+50')
-window.title('Agent')
-window.iconphoto(False, PhotoImage(file='logoagent.png'))
+window.title('agent')
 
 t=True
 def start():
@@ -19,15 +18,14 @@ def start():
     s_ip = server_ip.get()
     s_port = port.get()
     t_interval = interval.get()
-    device_url = 'https://' + s_ip + ':' + s_port + '/agent/'
+    device_url = 'http://' + s_ip + ':' + s_port + '/agent/'
     # OS
     system = str(platform.system())
     release = str(platform.release())
     os = system + ' ' + release
-
     device_pload = {'os': os, 'ip': d_ip}
     # add the device in the django server
-    d_req = requests.post(device_url, data=device_pload, varify=False)
+    d_req = requests.post(device_url, data=device_pload)
     time.sleep(5)
     # w
     disk_id = 0
@@ -169,28 +167,28 @@ def thr():
 def stop():
     global t
     t=False
-    b1 = Button(text='Start', width=5, height=1, fg="#ffffff",bg='#006600', activebackground="#3333ff", bd=5
+    b1 = Button(text='Start', width=5, height=1, fg="#ccccb3", bg='#3333ff', activebackground="#3333ff", bd=5
                , cursor="hand2", command=thr).place(x=80, y=180)
 
 
-device_ip = Entry(bg='#e6e6ff')
+device_ip = Entry(bg='#b8b894')
 device_ip.grid(row=0,column=1)
 
-server_ip = Entry(bg='#e6e6ff')
+server_ip = Entry(bg='#b8b894')
 server_ip.grid(row=1,column=1)
 
-port = Entry(bg='#e6e6ff')
+port = Entry(bg='#b8b894')
 port.grid(row=2,column=1)
 
-interval = Entry(bg='#e6e6ff')
+interval = Entry(bg='#b8b894')
 interval.grid(row=3,column=1)
 
-l1=Label(text='Device IP  ',fg="#ffffff",bg='#006666',font='Times').grid(row=0)
-l2=Label(text='Server IP  ',fg="#ffffff",bg='#006666',font='Times').grid(row=1)
-l3=Label(text='Server Port  ',fg="#ffffff",bg='#006666',font='Times').grid(row=2)
-l4=Label(text='Time Interval  ',fg="#ffffff",bg='#006666',font='Times').grid(row=3)
-b1 = Button(text='Start',width=5,height=1,fg="#ffffff",bg='#006600',activebackground="#3333ff",bd=5
+l1=Label(text='Device IP  ',fg="#004080",bg='#ccccb3',font='Times').grid(row=0)
+l2=Label(text='Server IP  ',fg="#004080",bg='#ccccb3',font='Times').grid(row=1)
+l3=Label(text='Server Port  ',fg="#004080",bg='#ccccb3',font='Times').grid(row=2)
+l4=Label(text='Time Interval  ',fg="#004080",bg='#ccccb3',font='Times').grid(row=3)
+b1 = Button(text='Start',width=5,height=1,fg="#ccccb3",bg='#3333ff',activebackground="#3333ff",bd=5
            ,cursor="hand2",command=thr).place(x=80,y=180)
-b2 = Button(text='Stop',width=5,height=1,fg="#ffffff",bg='dark red',activebackground="dark red",bd=5
+b2 = Button(text='Stop',width=5,height=1,fg="#ccccb3",bg='dark red',activebackground="dark red",bd=5
            ,cursor="hand2",command=stop).place(x=160,y=180)
 window.mainloop()
